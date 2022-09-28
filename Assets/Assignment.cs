@@ -203,8 +203,12 @@ static public class AssignmentPart2
     static public void LoadPartyDropDownChanged(string selectedName)
     {
         //string UserInput = GameObject.Find("PartyNameInputField").GetComponent<InputField>().text;
+        
         GameContent.partyCharacters.Clear();
-        StreamReader sr = new StreamReader("PartySaves/MagesTheif.txt");
+       // StreamReader sr = new StreamReader("PartySaves/MagesTheif.txt"); 
+        StreamReader sr = new StreamReader("PartySaves/" + selectedName );
+        //StreamReader sr2 = new StreamReader(GetListOfPartyNames().FindIndex(1).ToString + ".txt");
+
         string line;
 
         while ((line = sr.ReadLine()) != null)
