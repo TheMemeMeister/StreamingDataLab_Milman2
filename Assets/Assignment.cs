@@ -6,6 +6,7 @@ Pixel RPG characters created by Sean Browning.
 
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.UI;
 using UnityEngine;
 
 #region Assignment Instructions
@@ -189,12 +190,14 @@ static public class AssignmentPart2
 
     static public List<string> GetListOfPartyNames()
     {
-        return new List<string>() {
-            "sample 1",
-            "sample 2",
-            "sample 3"
-        };
+        List<string> partylist = new List<string>();
+        DirectoryInfo partydirectory = new DirectoryInfo("PartySaves"); // makes a directory of the party saves folder 
+        foreach (FileInfo checkfile in partydirectory.GetFiles()) //checks each file in the folder 
+        {
+            partylist.Add(checkfile.Name); // addingthe info from the files into my party list slots 
+        }
 
+        return partylist;
     }
 
     static public void LoadPartyDropDownChanged(string selectedName)
@@ -230,7 +233,8 @@ static public class AssignmentPart2
 
     static public void SavePartyButtonPressed()
     {
-        StreamWriter sw = new StreamWriter(Application.dataPath + Path.DirectorySeparatorChar + "Party.txt");
+        string UserInput = GameObject.Find("PartyNameInputField").GetComponent<InputField>().text;
+        StreamWriter sw = new StreamWriter("PartySaves/"+ UserInput +".txt");
         foreach (PartyCharacter pc in GameContent.partyCharacters)
         {
             Debug.Log("Writing Character Stats Here");
