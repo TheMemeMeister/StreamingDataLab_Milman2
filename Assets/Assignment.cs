@@ -98,6 +98,7 @@ static public class AssignmentPart1
     {
 
         GameContent.partyCharacters.Clear();
+       
         StreamReader sr = new StreamReader(Application.dataPath + Path.DirectorySeparatorChar + "Party.txt");
         string line;
 
