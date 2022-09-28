@@ -202,8 +202,9 @@ static public class AssignmentPart2
 
     static public void LoadPartyDropDownChanged(string selectedName)
     {
+        //string UserInput = GameObject.Find("PartyNameInputField").GetComponent<InputField>().text;
         GameContent.partyCharacters.Clear();
-        StreamReader sr = new StreamReader(Application.dataPath + Path.DirectorySeparatorChar + "Party.txt");
+        StreamReader sr = new StreamReader("PartySaves/MagesTheif.txt");
         string line;
 
         while ((line = sr.ReadLine()) != null)
