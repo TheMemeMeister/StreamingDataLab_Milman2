@@ -214,7 +214,10 @@ public class SystemManager : MonoBehaviour
 
     public void DeleteButtonPressed()
     {
-        AssignmentPart2.DeletePartyButtonPressed();
+        int menuIndex = loadPartyDropDown.GetComponent<Dropdown>().value;
+        List<Dropdown.OptionData> menuOptions = loadPartyDropDown.GetComponent<Dropdown>().options;
+        string value = menuOptions[menuIndex].text;
+        AssignmentPart2.DeletePartyButtonPressed(value); //adding a value (index slot/ option slot) to Delete function 
     }
 
     public string GetPartyNameFromInput()

@@ -178,11 +178,20 @@ Good luck, journey well.
 
 static public class AssignmentPart2
 {
+    static List<string> partylist = new List<string>();
+
     const int PartyCharacterSaveDataSignifier = 0;
     const int EquipmentSaveDataSignifier = 1;
+
+
     
     static public void GameStart()
     {
+        DirectoryInfo partydirectory = new DirectoryInfo("PartySaves"); // makes a directory of the party saves folder 
+        foreach (FileInfo checkfile in partydirectory.GetFiles()) //checks each file in the folder 
+        {
+            partylist.Add(checkfile.Name); // addingthe info from the files into my party list slots 
+        }
 
         GameContent.RefreshUI();
 
@@ -190,13 +199,14 @@ static public class AssignmentPart2
 
     static public List<string> GetListOfPartyNames()
     {
-        List<string> partylist = new List<string>();
-        DirectoryInfo partydirectory = new DirectoryInfo("PartySaves"); // makes a directory of the party saves folder 
-        foreach (FileInfo checkfile in partydirectory.GetFiles()) //checks each file in the folder 
-        {
-            partylist.Add(checkfile.Name); // addingthe info from the files into my party list slots 
-        }
 
+        //DirectoryInfo partydirectory = new DirectoryInfo("PartySaves"); // makes a directory of the party saves folder 
+        //foreach (FileInfo checkfile in partydirectory.GetFiles()) //checks each file in the folder 
+        //{
+        //    partylist.Add(checkfile.Name); // addingthe info from the files into my party list slots 
+        //}
+
+        //return new List<string>();
         return partylist;
     }
 
@@ -231,9 +241,9 @@ static public class AssignmentPart2
             }
 
             GameContent.RefreshUI();
-
+            
         }
-      
+        sr.Close();
     }
 
     static public void SavePartyButtonPressed()
@@ -252,7 +262,7 @@ static public class AssignmentPart2
             }
         }
 
-
+        partylist.Add(UserInput);
 
         sw.Close();
         Debug.Log("Saved Pressed");
@@ -261,12 +271,32 @@ static public class AssignmentPart2
 
     static public void NewPartyButtonPressed()
     {
-
+        //Reroll or load a default save here? 
     }
 
-    static public void DeletePartyButtonPressed()
+    static public void DeletePartyButtonPressed(string selectedName)
     {
+      
+        //DirectoryInfo partydirectory = new DirectoryInfo("PartySaves/" + selectedName); // makes a directory of the party saves folder 
+                                                                                        //foreach (FileInfo file in partydirectory.EnumerateFiles(selectedName))
+                                                                                        //{
+                                                                                        //    file.Delete();
+                                                                                        //}
+                                                                                        //foreach (DirectoryInfo dir in partydirectory.EnumerateDirectories(selectedName))
+                                                                                        //{
+                                                                                        //    dir.Delete(true);
+                                                                                        //}
 
+        File.Delete("PartySaves/" + selectedName);
+        Debug.Log("Delete Pressed " + selectedName + " deleted");
+        // partydirectory.Delete(selectedNam);
+
+
+
+        partylist.Remove(selectedName);
+        //Debug.Log("Delete Pressed, should be no text");
+        GameContent.RefreshUI();
+        
     }
 
 }
