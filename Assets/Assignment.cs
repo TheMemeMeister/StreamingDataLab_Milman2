@@ -215,8 +215,9 @@ static public class AssignmentPart2
         //string UserInput = GameObject.Find("PartyNameInputField").GetComponent<InputField>().text;
         
         GameContent.partyCharacters.Clear();
-       // StreamReader sr = new StreamReader("PartySaves/MagesTheif.txt"); 
-        StreamReader sr = new StreamReader("PartySaves/" + selectedName );
+        // StreamReader sr = new StreamReader("PartySaves/MagesTheif.txt"); 
+        Debug.Log("PartySaves/" + selectedName);
+        StreamReader sr = new StreamReader("PartySaves/" + selectedName);
         //StreamReader sr2 = new StreamReader(GetListOfPartyNames().FindIndex(1).ToString + ".txt");
 
         string line;
@@ -262,7 +263,7 @@ static public class AssignmentPart2
             }
         }
 
-        partylist.Add(UserInput);
+        partylist.Add(UserInput + ".txt");
 
         sw.Close();
         Debug.Log("Saved Pressed");
